@@ -1,0 +1,316 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>RateLimitThrottle</name>
+    </assembly>
+    <members>
+        <member name="M:RateLimitThrottle.Cache.ICacheManager.Get``1(System.String)">
+            <summary>
+            获取
+            </summary>
+        </member>
+        <member name="M:RateLimitThrottle.Cache.ICacheManager.Set(System.String,System.Object,System.Nullable{System.Int32})">
+            <summary>
+            设置
+            </summary>
+        </member>
+        <member name="T:RateLimitThrottle.Counter.IRateLimitCounterStore">
+            <summary>
+            计数器接口
+            </summary>
+        </member>
+        <member name="M:RateLimitThrottle.Counter.IRateLimitCounterStore.Exists(System.String)">
+            <summary>
+            是否存在
+            </summary>
+        </member>
+        <member name="M:RateLimitThrottle.Counter.IRateLimitCounterStore.Get(System.String)">
+            <summary>
+            获取
+            </summary>
+        </member>
+        <member name="M:RateLimitThrottle.Counter.IRateLimitCounterStore.Remove(System.String)">
+            <summary>
+            删除
+            </summary>
+        </member>
+        <member name="M:RateLimitThrottle.Counter.IRateLimitCounterStore.Set(System.String,RateLimitThrottle.Models.RateLimitCounter,System.TimeSpan)">
+            <summary>
+            设置
+            </summary>
+        </member>
+        <member name="T:RateLimitThrottle.Extensions.HttpContextExtension">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:RateLimitThrottle.Extensions.HttpContextExtension.GetIpAddress(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            取得客户端IP地址
+            </summary>
+        </member>
+        <member name="M:RateLimitThrottle.Extensions.HttpContextExtension.GetDefaultUserIdentity(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            取得默认用户Identity值
+            </summary>
+        </member>
+        <member name="M:RateLimitThrottle.Extensions.HttpContextExtension.GetHeaderValue(Microsoft.AspNetCore.Http.HttpContext,System.String)">
+            <summary>
+            取得Header值
+            </summary>
+        </member>
+        <member name="M:RateLimitThrottle.Extensions.HttpContextExtension.GetQueryValue(Microsoft.AspNetCore.Http.HttpContext,System.String)">
+            <summary>
+            取得Query值
+            </summary>
+        </member>
+        <member name="M:RateLimitThrottle.Extensions.HttpContextExtension.GetRequestPath(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            取得RequestPath
+            </summary>
+        </member>
+        <member name="M:RateLimitThrottle.Extensions.HttpContextExtension.GetCookieValue(Microsoft.AspNetCore.Http.HttpContext,System.String)">
+            <summary>
+            取得Cookie值
+            </summary>
+        </member>
+        <member name="M:RateLimitThrottle.Extensions.HttpContextExtension.GetFormValue(Microsoft.AspNetCore.Http.HttpContext,System.String)">
+            <summary>
+            取得Form值
+            </summary>
+        </member>
+        <member name="M:RateLimitThrottle.RateLimitApplicationBuilderExtensions.UseIPRateLimiting(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            使用IP限流策略
+            </summary>
+            <param name="builder"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RateLimitThrottle.RateLimitApplicationBuilderExtensions.UseClientRateLimiting(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            使用Client限流策略
+            </summary>
+            <param name="builder"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RateLimitThrottle.RateLimitApplicationBuilderExtensions.Validate(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            验证服务是否注入
+            </summary>
+            <param name="builder"></param>
+        </member>
+        <member name="M:RateLimitThrottle.RateLimitServiceCollectionExtensions.AddRedisCounter(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{RateLimitThrottle.Models.RedisOptions})">
+            <summary>
+            使用Redis计数器
+            </summary>
+            <param name="services"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RateLimitThrottle.RateLimitServiceCollectionExtensions.AddMemoryPolicyCache(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            使用内存缓存
+            </summary>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RateLimitThrottle.RateLimitServiceCollectionExtensions.AddDefaultPolicyStore(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfigurationSection)">
+            <summary>
+            使用配置文件存储
+            </summary>
+            <param name="services"></param>
+            <param name="config"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RateLimitThrottle.RateLimitServiceCollectionExtensions.AddMySqlPolicyStore(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{RateLimitThrottle.Models.MySqlOptions})">
+            <summary>
+            使用Mysql存储
+            </summary>
+            <param name="services"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="P:RateLimitThrottle.Models.MySqlOptions.ConnectionString">
+            <summary>
+            连接字符串
+            </summary>
+        </member>
+        <member name="T:RateLimitThrottle.Models.RateLimitItemValve">
+            <summary>
+            限流名册
+            </summary>
+        </member>
+        <member name="T:RateLimitThrottle.Models.RateLimitPolicy">
+            <summary>
+            限流策略
+            </summary>
+        </member>
+        <member name="P:RateLimitThrottle.Models.RateLimitPolicy.Rules">
+            <summary>
+            限流规则
+            </summary>
+        </member>
+        <member name="T:RateLimitThrottle.Models.RateLimitPolicyType">
+            <summary>
+            限流策略类型
+            </summary>
+        </member>
+        <member name="F:RateLimitThrottle.Models.RateLimitPolicyType.IP">
+            <summary>
+            Ip
+            </summary>
+        </member>
+        <member name="F:RateLimitThrottle.Models.RateLimitPolicyType.Client">
+            <summary>
+            Client
+            </summary>
+        </member>
+        <member name="P:RateLimitThrottle.Models.RateLimitPrefix.Prefix">
+            <summary>
+            前缀，用于区分不同站点
+            </summary>
+        </member>
+        <member name="T:RateLimitThrottle.Models.RateLimitRule">
+            <summary>
+            限流规则
+            </summary>
+        </member>
+        <member name="P:RateLimitThrottle.Models.RateLimitRule.Endpoint">
+            <summary>
+            HTTP verb and path 
+            </summary>
+            <example>
+            get:/api/values
+            *:/api/values
+            *
+            </example>
+        </member>
+        <member name="P:RateLimitThrottle.Models.RateLimitRule.Period">
+            <summary>
+            限流周期： 1s, 1m, 1h
+            </summary>
+        </member>
+        <member name="P:RateLimitThrottle.Models.RateLimitRule.Limit">
+            <summary>
+            在一个定义的时间段内可以发出的请求的最大数量
+            </summary>
+        </member>
+        <member name="T:RateLimitThrottle.Models.RateLimitStoreSettings">
+            <summary>
+            限流配置
+            </summary>
+        </member>
+        <member name="P:RateLimitThrottle.Models.RateLimitStoreSettings.WhiteList">
+            <summary>
+            白名单
+            </summary>
+        </member>
+        <member name="P:RateLimitThrottle.Models.RateLimitStoreSettings.Policys">
+            <summary>
+            策略
+            </summary>
+        </member>
+        <member name="P:RateLimitThrottle.Models.RedisOptions.ConnectionString">
+            <summary>
+            连接字符串
+            </summary>
+        </member>
+        <member name="P:RateLimitThrottle.Models.RedisOptions.KeyPrefix">
+            <summary>
+            Key前缀
+            </summary>
+        </member>
+        <member name="T:RateLimitThrottle.RateLimitCacheKey">
+            <summary>
+            缓存key
+            </summary>
+        </member>
+        <member name="T:RateLimitThrottle.RateLimitOptions">
+            <summary>
+            限流配置
+            </summary>
+        </member>
+        <member name="P:RateLimitThrottle.RateLimitOptions.EnableRateLimiting">
+            <summary>
+            是否启用限流，默认：true
+            </summary>
+        </member>
+        <member name="P:RateLimitThrottle.RateLimitOptions.HttpStatusCode">
+            <summary>
+            在发生限流限制时返回HTTP状态代码，默认：429(请求太多)
+            </summary>
+        </member>
+        <member name="P:RateLimitThrottle.RateLimitOptions.HttpResponseFomatterMessage">
+            <summary>
+            在发生限流限制时返回HTTP消息
+            如果没有指定，默认：请求过于频繁，调用次数超过最大限制!
+            </summary>
+        </member>
+        <member name="P:RateLimitThrottle.RateLimitOptions.RateLimitCounterPrefix">
+            <summary>
+            限流计数器前缀
+            用于区分不同接口站点的计数器（多个接口使用同一个库，需要唯一）
+            </summary>
+        </member>
+        <member name="P:RateLimitThrottle.RateLimitOptions.ProlicyCacheTime">
+            <summary>
+            策略缓存时间
+            单位秒，默认5分钟
+            </summary>
+        </member>
+        <member name="F:RateLimitThrottle.RateLimitOptions.OnGetClient">
+            <summary>
+            获取Client,默认获取 User.Identity.Name
+            </summary>
+        </member>
+        <member name="F:RateLimitThrottle.RateLimitOptions.OnGetIpAddress">
+            <summary>
+            获取IP,默认获取 Head[X-Forwarded-For] 和 HttpContext.Connection.RemoteIpAddress
+            </summary>
+        </member>
+        <member name="F:RateLimitThrottle.RateLimitOptions.LogHandler">
+            <summary>
+            日志输出
+            </summary>
+        </member>
+        <member name="M:RateLimitThrottle.RateLimitProcessor.IsWhitelisted(RateLimitThrottle.Models.RequestIdentity)">
+            <summary>
+            是否在白名单
+            </summary>
+            <param name="requestIdentity"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RateLimitThrottle.RateLimitProcessor.GetMatchingRules(RateLimitThrottle.Models.RequestIdentity)">
+            <summary>
+            获取匹配的规则
+            </summary>
+            <param name="requestIdentity"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RateLimitThrottle.RateLimitProcessor.ProcessRequest(RateLimitThrottle.Models.RequestIdentity,RateLimitThrottle.Models.RateLimitRule)">
+            <summary>
+            处理请求数
+            </summary>
+            <param name="requestIdentity"></param>
+            <param name="rule"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RateLimitThrottle.RateLimitProcessor.ReturnQuotaExceededResponse(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            处理返回值
+            </summary>
+            <param name="httpContext"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RateLimitThrottle.Stores.IPolicyStore.GetWhiteList">
+            <summary>
+            获取白名单
+            </summary>
+        </member>
+        <member name="M:RateLimitThrottle.Stores.IPolicyStore.GetPolicys">
+            <summary>
+            获取策略规则
+            </summary>
+        </member>
+    </members>
+</doc>
