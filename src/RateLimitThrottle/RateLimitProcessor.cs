@@ -28,6 +28,11 @@ namespace RateLimitThrottle
             _counterStore = counterStore;
         }
 
+        /// <summary>
+        /// 校验
+        /// </summary>
+        /// <param name="identity"></param>
+        /// <returns></returns>
         public bool Check(RequestIdentity identity)
         {
             //白名单
@@ -68,6 +73,7 @@ namespace RateLimitThrottle
                 }
             }
 
+            //没有匹配到规则 默认放行
             return true;
         }
 
@@ -202,6 +208,12 @@ namespace RateLimitThrottle
             //return BitConverter.ToString(hashBytes).Replace("-", string.Empty);
         }
 
+        /// <summary>
+        /// 日志
+        /// </summary>
+        /// <param name="requestIdentity"></param>
+        /// <param name="counter"></param>
+        /// <param name="rule"></param>
         public void LogBlockedRequest(RequestIdentity requestIdentity, RateLimitCounter counter, RateLimitRule rule)
         {
             var log = $"{requestIdentity.RequestPath}\r\n已限制来自[{requestIdentity.PolicyType.ToString()}]{requestIdentity.Value}的请求  {requestIdentity.HttpVerb}:{requestIdentity.Path}\r\n匹配规则: {rule.Endpoint}，{rule.Limit}/{rule.Period}\r\n计数器: [{ComputeCounterKey(requestIdentity, rule)}] {counter.TotalRequests}，{counter.Timestamp.ToString("yyyy-MM-dd HH:mm:ss")}";

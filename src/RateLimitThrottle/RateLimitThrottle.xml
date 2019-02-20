@@ -39,6 +39,16 @@
             设置
             </summary>
         </member>
+        <member name="T:RateLimitThrottle.Counter.Memory.MemoryRateLimitCounterStore">
+            <summary>
+            Memory计数器
+            </summary>
+        </member>
+        <member name="T:RateLimitThrottle.Counter.Redis.RedisRateLimitCounterStore">
+            <summary>
+            Redis计数器
+            </summary>
+        </member>
         <member name="T:RateLimitThrottle.Extensions.HttpContextExtension">
             <summary>
             
@@ -99,24 +109,39 @@
             </summary>
             <param name="builder"></param>
         </member>
-        <member name="M:RateLimitThrottle.RateLimitServiceCollectionExtensions.AddRedisCounter(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{RateLimitThrottle.Models.RedisOptions})">
+        <member name="M:RateLimitThrottle.RateLimitServiceCollectionExtensions.AddRateLimiting(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{RateLimitThrottle.RateLimitOptions})">
             <summary>
-            使用Redis计数器
+            限流中间件
             </summary>
             <param name="services"></param>
             <param name="options"></param>
             <returns></returns>
         </member>
+        <member name="M:RateLimitThrottle.RateLimitServiceCollectionExtensions.AddRedisCounter(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{RateLimitThrottle.Models.RedisOptions})">
+            <summary>
+            Redis计数器
+            </summary>
+            <param name="services"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:RateLimitThrottle.RateLimitServiceCollectionExtensions.AddMemoryCounter(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Memory计数器
+            </summary>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
         <member name="M:RateLimitThrottle.RateLimitServiceCollectionExtensions.AddMemoryPolicyCache(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
             <summary>
-            使用内存缓存
+            内存缓存
             </summary>
             <param name="services"></param>
             <returns></returns>
         </member>
         <member name="M:RateLimitThrottle.RateLimitServiceCollectionExtensions.AddDefaultPolicyStore(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfigurationSection)">
             <summary>
-            使用配置文件存储
+            策略 使用文件存储
             </summary>
             <param name="services"></param>
             <param name="config"></param>
@@ -124,7 +149,7 @@
         </member>
         <member name="M:RateLimitThrottle.RateLimitServiceCollectionExtensions.AddMySqlPolicyStore(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{RateLimitThrottle.Models.MySqlOptions})">
             <summary>
-            使用Mysql存储
+            策略 使用Mysql存储
             </summary>
             <param name="services"></param>
             <param name="options"></param>
@@ -273,6 +298,13 @@
             日志输出
             </summary>
         </member>
+        <member name="M:RateLimitThrottle.RateLimitProcessor.Check(RateLimitThrottle.Models.RequestIdentity)">
+            <summary>
+            校验
+            </summary>
+            <param name="identity"></param>
+            <returns></returns>
+        </member>
         <member name="M:RateLimitThrottle.RateLimitProcessor.IsWhitelisted(RateLimitThrottle.Models.RequestIdentity)">
             <summary>
             是否在白名单
@@ -294,6 +326,14 @@
             <param name="requestIdentity"></param>
             <param name="rule"></param>
             <returns></returns>
+        </member>
+        <member name="M:RateLimitThrottle.RateLimitProcessor.LogBlockedRequest(RateLimitThrottle.Models.RequestIdentity,RateLimitThrottle.Models.RateLimitCounter,RateLimitThrottle.Models.RateLimitRule)">
+            <summary>
+            日志
+            </summary>
+            <param name="requestIdentity"></param>
+            <param name="counter"></param>
+            <param name="rule"></param>
         </member>
         <member name="M:RateLimitThrottle.RateLimitProcessor.ReturnQuotaExceededResponse(Microsoft.AspNetCore.Http.HttpContext)">
             <summary>

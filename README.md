@@ -2,10 +2,10 @@
 
 基于Asp.Net Core的限流中间件。
 
-#### 1.支持IP策略和Client策略
-#### 2.支持配置读文件或读库(mysql，可扩展其他库)
-#### 3.支持白名单
-#### 4.支持自定义扩展
+1.支持IP策略和Client策略  
+2.支持配置读文件或读库(mysql，可扩展其他库)  
+3.支持白名单  
+4.支持自定义扩展  
 
 ## 规则
 Endpoint格式：{HTTP_Verb}:{PATH}  Http谓词和请求路径  
@@ -58,16 +58,13 @@ services.AddRateLimiting(options =>
     //自定义日志输出
     options.LogHandler = msg =>
     {
-   	BihuTech.Infrastructure.Logging.LoggerFactory.GetLogger2("RateLimiting").Info(msg);
+   	    Console.WriteLine(msg);
     };
-})
-//Redis计数器
-.AddRedisCounter(options =>
-{
-    options.ConnectionString = "192.168.1.19:6379,defaultDatabase=1,poolsize=50";
 })
 //内存缓存
 .AddMemoryPolicyCache()
+//Memory计数器
+.AddMemoryCounter()
 //读取文件配置
 .AddDefaultPolicyStore(Configuration.GetSection("RateLimitStoreSettings"));
 ```
@@ -97,7 +94,7 @@ services.AddRateLimiting(options =>
 ```c#
 services.AddRateLimiting(options =>
 {
-    //自定义ip获取方式, nginx反向代理 设置请求头
+    //自定义ip获取方式, 获取nginx反向代理请求头
     options.OnGetIpAddress = httpContext =>
     {
         var ip = httpContext.Request.Headers["X-Real-IP"].FirstOrDefault();
@@ -112,7 +109,7 @@ services.AddRateLimiting(options =>
     //前缀，区分不同接口站点
     options.RateLimitCounterPrefix = "testApi1";
     //策略缓存时间
-    options.ProlicyCacheTime = 5;
+    options.ProlicyCacheTime = 300;
     //限流后返回的http状态码
     options.HttpStatusCode = 429;
     //限流后返回的http消息
@@ -136,7 +133,7 @@ AddDefaultPolicyStore(Configuration.GetSection("RateLimitStoreSettings"))
 //读取mysql
 .AddMySqlPolicyStore(options =>
 {
-    options.ConnectionString = "Server=192.168.1.1;User Id=admin;Password=123456;Database=sso;Allow User Variables=True;";
+    options.ConnectionString = "Server=192.168.1.19;User Id=admin;Password=123456;Database=sso;Allow User Variables=True;";
 });
 ```
 如果需要其他存储方式，只需实现IPolicyStore接口，然后注入即可
@@ -146,14 +143,23 @@ AddDefaultPolicyStore(Configuration.GetSection("RateLimitStoreSettings"))
 如需要使用redis缓存，只需要实现ICacheManager接口，然后注入即可
 
 #### 三、计数器
-计数器默认使用redis 实现接口IRateLimitCounterStore  
-可以考虑使用内存计算，效率更高，但是重启会丢失
+计数器已实现memory和redis   
+实现接口IRateLimitCounterStore  
+```c#
+//Memory计数器
+.AddMemoryCounter()
+//Redis计数器
+.AddRedisCounter(options =>
+{
+    options.ConnectionString = "192.168.1.19:6379,defaultDatabase=1,poolsize=50";
+})
+```
+测试可以使用memory计数器，效率更高，但是重启会丢失  
+生成环境建议使用redis计数器
 
 ## 其他
-读文件配置：  
- [appsettings.json](https://github.com/niubileme/RateLimitThrottle/blob/master/docs/appsettings.json)  
-mysql脚本：  
- [mysql.sql](https://github.com/niubileme/RateLimitThrottle/blob/master/docs/mysql.sql) 
+读文件配置：  [appsettings.json](https://github.com/niubileme/RateLimitThrottle/blob/master/docs/appsettings.json)  
+mysql脚本：  [mysql.sql](https://github.com/niubileme/RateLimitThrottle/blob/master/docs/mysql.sql) 
 
 ## 参考
 AspNetCoreRateLimit [https://github.com/stefanprodan/AspNetCoreRateLimit](https://github.com/stefanprodan/AspNetCoreRateLimit)  

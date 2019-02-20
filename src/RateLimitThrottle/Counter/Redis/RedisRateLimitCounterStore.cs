@@ -4,6 +4,9 @@ using System;
 
 namespace RateLimitThrottle.Counter.Redis
 {
+    /// <summary>
+    /// Redis计数器
+    /// </summary>
     public class RedisRateLimitCounterStore : IRateLimitCounterStore
     {
         private readonly CSRedisClient _client;

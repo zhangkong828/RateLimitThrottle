@@ -13,7 +13,7 @@
 2.支持配置读文件或读库(mysql)
 3.白名单
 4.支持自定义扩展</Description>
-    <NeutralLanguage>sq</NeutralLanguage>
+    <NeutralLanguage></NeutralLanguage>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

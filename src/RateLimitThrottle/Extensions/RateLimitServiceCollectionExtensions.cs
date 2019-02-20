@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using RateLimitThrottle.Cache;
 using RateLimitThrottle.Cache.Memory;
 using RateLimitThrottle.Counter;
+using RateLimitThrottle.Counter.Memory;
 using RateLimitThrottle.Counter.Redis;
 using RateLimitThrottle.Models;
 using RateLimitThrottle.Stores;
@@ -16,6 +17,12 @@ namespace RateLimitThrottle
 {
     public static class RateLimitServiceCollectionExtensions
     {
+        /// <summary>
+        /// 限流中间件
+        /// </summary>
+        /// <param name="services"></param>
+        /// <param name="options"></param>
+        /// <returns></returns>
         public static IServiceCollection AddRateLimiting(this IServiceCollection services, Action<RateLimitOptions> options = null)
         {
             var opts = new RateLimitOptions();
@@ -26,7 +33,7 @@ namespace RateLimitThrottle
         }
 
         /// <summary>
-        /// 使用Redis计数器
+        /// Redis计数器
         /// </summary>
         /// <param name="services"></param>
         /// <param name="options"></param>
@@ -37,7 +44,7 @@ namespace RateLimitThrottle
             options.Invoke(opts);
             if (string.IsNullOrWhiteSpace(opts.ConnectionString))
             {
-                throw new ArgumentException("计数器，缺少Redis连接字符串");
+                throw new ArgumentException("Redis计数器，缺少Redis连接字符串");
             }
             services.AddSingleton(opts);
             services.AddSingleton<IRateLimitCounterStore, RedisRateLimitCounterStore>();
@@ -45,7 +52,19 @@ namespace RateLimitThrottle
         }
 
         /// <summary>
-        /// 使用内存缓存
+        /// Memory计数器
+        /// </summary>
+        /// <param name="services"></param>
+        /// <returns></returns>
+        public static IServiceCollection AddMemoryCounter(this IServiceCollection services)
+        {
+            services.AddSingleton<IRateLimitCounterStore, MemoryRateLimitCounterStore>();
+            return services;
+        }
+
+
+        /// <summary>
+        /// 内存缓存
         /// </summary>
         /// <param name="services"></param>
         /// <returns></returns>
@@ -56,7 +75,7 @@ namespace RateLimitThrottle
         }
 
         /// <summary>
-        /// 使用配置文件存储
+        /// 策略 使用文件存储
         /// </summary>
         /// <param name="services"></param>
         /// <param name="config"></param>
@@ -69,7 +88,7 @@ namespace RateLimitThrottle
         }
 
         /// <summary>
-        /// 使用Mysql存储
+        /// 策略 使用Mysql存储
         /// </summary>
         /// <param name="services"></param>
         /// <param name="options"></param>
