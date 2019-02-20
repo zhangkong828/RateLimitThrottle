@@ -1,1 +1,1 @@
-dotnet pack -c Release --output ../nuget
+dotnet pack -c Release --output ../../nuget

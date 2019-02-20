@@ -2,18 +2,19 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>2.0.0</Version>
+    <Version>2.2.0</Version>
     <Authors>ZhangKong</Authors>
     <Company />
     <PackageProjectUrl>https://github.com/niubileme/RateLimitThrottle</PackageProjectUrl>
     <RepositoryUrl>https://github.com/niubileme/RateLimitThrottle</RepositoryUrl>
-    <PackageTags>asp.net core</PackageTags>
-    <Description>限流中间件
+    <PackageTags>asp.netcore 限流 中间件</PackageTags>
+    <Description>一个简易可用易扩展的限流中间件
 1.支持IP策略和Client策略
 2.支持配置读文件或读库(mysql)
 3.白名单
 4.支持自定义扩展</Description>
     <NeutralLanguage></NeutralLanguage>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -23,8 +24,8 @@
   <ItemGroup>
     <PackageReference Include="CSRedisCore" Version="3.0.35" />
     <PackageReference Include="Dapper" Version="1.50.7" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="2.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="2.2.0" />
     <PackageReference Include="MySql.Data" Version="8.0.15" />
   </ItemGroup>
 

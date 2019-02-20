@@ -1,6 +1,6 @@
 # RateLimitThrottle
 
-基于Asp.Net Core的限流中间件。
+基于Asp.Net Core的简易可用易扩展的限流中间件
 
 1.支持IP策略和Client策略  
 2.支持配置读文件或读库(mysql，可扩展其他库)  
